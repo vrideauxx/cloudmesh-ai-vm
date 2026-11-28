@@ -483,8 +483,7 @@ class Provider(CloudBaseManager):
         """Check VM existence without treating API failures as absence."""
         self._setup_chi_context()
         try:
-            server = chi.server.get_server(name)
-            return server is not None
+            return chi.server.get_server_id(name) is not None
         except Exception as exc:
             raise VMProviderError(
                 f"Unable to verify whether VM {name} already exists: {exc}"
